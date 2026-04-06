@@ -34,13 +34,13 @@ export default function ThemeToggle() {
     >
       {/* Pill toggle */}
       <span className="relative inline-flex w-10 h-5 rounded-full border border-dorado/30 transition-colors duration-500"
-            style={{ background: theme === "azul" ? "rgba(52,82,99,0.4)" : "rgba(43,27,18,0.6)" }}>
+            style={{ background: theme === "azul" ? "rgba(123,32,56,0.4)" : "rgba(43,27,18,0.6)" }}>
         <span
           className="absolute top-0.5 w-4 h-4 rounded-full transition-all duration-500"
           style={{
             left: theme === "azul" ? "calc(100% - 18px)" : "2px",
-            background: theme === "azul" ? "#345263" : "#a36529",
-            boxShadow: `0 0 6px ${theme === "azul" ? "#345263" : "#a36529"}`,
+            background: theme === "azul" ? "#7B2038" : "#a36529",
+            boxShadow: `0 0 6px ${theme === "azul" ? "#7B2038" : "#a36529"}`,
           }}
         />
       </span>

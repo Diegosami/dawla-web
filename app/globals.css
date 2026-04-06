@@ -35,9 +35,9 @@
 
 /* ── Tema Azul — mayor especificidad con html selector ── */
 html[data-theme="azul"] {
-  --bg-deep:  #091520 !important;
-  --bg-mid:   #112233 !important;
-  --bg-card:  #0d1c2e !important;
+  --bg-deep:  #150508 !important;
+  --bg-mid:   #2A0D14 !important;
+  --bg-card:  #1E080D !important;
 }
 
 * { box-sizing: border-box; }
