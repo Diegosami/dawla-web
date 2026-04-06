@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import DawlaLogo from "./DawlaLogo";
+import ThemeToggle from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -28,9 +29,10 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#1a1009]/95 backdrop-blur-md border-b border-dorado/20 shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
+          ? "backdrop-blur-md border-b border-dorado/20 shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
           : "bg-transparent"
       }`}
+      style={scrolled ? { backgroundColor: "color-mix(in srgb, var(--bg-deep) 95%, transparent)" } : {}}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
         {/* Logo */}
@@ -52,27 +54,32 @@ export default function Header() {
           ))}
           <a
             href="#contacto"
-            className="ml-4 px-5 py-2 border border-dorado text-dorado font-sans text-xs font-semibold tracking-widest uppercase hover:bg-dorado hover:text-cafe transition-all duration-300"
+            className="ml-2 px-5 py-2 border border-dorado text-dorado font-sans text-xs font-semibold tracking-widest uppercase hover:bg-dorado hover:text-cafe transition-all duration-300"
           >
             Reservar
           </a>
+          <ThemeToggle />
         </nav>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-beige hover:text-dorado transition-colors"
-          onClick={() => setOpen(!open)}
-          aria-label="Menu"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile right side */}
+        <div className="md:hidden flex items-center gap-4">
+          <ThemeToggle />
+          <button
+            className="text-beige hover:text-dorado transition-colors"
+            onClick={() => setOpen(!open)}
+            aria-label="Menu"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-500 ${
           open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        } bg-[#1a1009]/98 backdrop-blur-xl border-b border-dorado/20`}
+        } backdrop-blur-xl border-b border-dorado/20`}
+        style={{ backgroundColor: "var(--bg-deep)" }}
       >
         <nav className="flex flex-col px-6 py-6 gap-5">
           {navLinks.map((l) => (

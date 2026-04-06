@@ -19,7 +19,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#1a1009]"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: "var(--bg-deep)" }}
     >
       {/* Patrón árabe parallax */}
       <div
@@ -94,7 +94,7 @@ export default function Hero() {
       {/* Fade a siguiente sección */}
       <div
         className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, transparent, #1a1009)" }}
+        style={{ background: "linear-gradient(to bottom, transparent, var(--bg-deep))" }}
         aria-hidden
       />
     </section>

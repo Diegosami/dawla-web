@@ -10,7 +10,7 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#1a1009] border-t border-dorado/15 overflow-hidden">
+    <footer className="relative border-t border-dorado/15 overflow-hidden" style={{ backgroundColor: "var(--bg-deep)" }}>
       {/* Patrón top */}
       <div className="absolute inset-0 arabic-pattern opacity-[0.03]" aria-hidden />
 

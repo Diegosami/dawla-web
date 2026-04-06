@@ -29,7 +29,7 @@ export default function Contacto() {
   };
 
   return (
-    <section id="contacto" className="relative section-pad overflow-hidden" style={{ background: "#2b1b12" }}>
+    <section id="contacto" className="relative section-pad overflow-hidden" style={{ background: "var(--bg-mid)" }}>
       {/* Patrón fondo */}
       <div className="absolute inset-0 arabic-pattern-sm opacity-[0.05]" aria-hidden />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-dorado/40 to-transparent" />

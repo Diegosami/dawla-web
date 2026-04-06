@@ -79,7 +79,7 @@ export default function Menu() {
   const filtered = active === "Todo" ? products : products.filter((p) => p.category === active);
 
   return (
-    <section id="menu" className="relative section-pad overflow-hidden" style={{ background: "#2b1b12" }}>
+    <section id="menu" className="relative section-pad overflow-hidden" style={{ background: "var(--bg-mid)" }}>
       {/* Patrón fondo */}
       <div className="absolute inset-0 arabic-pattern opacity-[0.05]" aria-hidden />
 
@@ -168,7 +168,7 @@ export default function Menu() {
               </div>
 
               {/* Info */}
-              <div className="bg-[#1f1208] border border-dorado/10 p-5 group-hover:border-dorado/30 transition-colors duration-300">
+              <div className="border border-dorado/10 p-5 group-hover:border-dorado/30 transition-colors duration-300" style={{ backgroundColor: "var(--bg-card)" }}>
                 <div className="flex items-start justify-between mb-2">
                   <h3 className="font-serif text-lg text-beige font-light leading-snug flex-1 pr-3">
                     {p.name}

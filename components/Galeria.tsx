@@ -29,7 +29,7 @@ export default function Galeria() {
   const { ref, inView } = useInView();
 
   return (
-    <section id="galeria" className="relative section-pad bg-[#1a1009] overflow-hidden">
+    <section id="galeria" className="relative section-pad overflow-hidden" style={{ backgroundColor: "var(--bg-deep)" }}>
       {/* Patrón fondo */}
       <div className="absolute inset-0 arabic-pattern opacity-[0.04]" aria-hidden />
 

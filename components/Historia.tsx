@@ -17,7 +17,7 @@ export default function Historia() {
   const { ref, inView } = useInView();
 
   return (
-    <section id="historia" className="relative section-pad bg-[#1a1009] overflow-hidden">
+    <section id="historia" className="relative section-pad overflow-hidden" style={{ backgroundColor: "var(--bg-deep)" }}>
       {/* Fondo patrón sutil */}
       <div className="absolute inset-0 arabic-pattern-sm opacity-[0.04]" aria-hidden />
 
@@ -63,14 +63,14 @@ export default function Historia() {
 
               {/* Placeholder imagen */}
               <div
-                className="relative w-full aspect-[3/4] overflow-hidden bg-[#2b1b12]"
-                style={{ borderRadius: "50% 50% 4px 4px / 30% 30% 4px 4px" }}
+                className="relative w-full aspect-[3/4] overflow-hidden"
+                style={{ backgroundColor: "var(--bg-mid)", borderRadius: "50% 50% 4px 4px / 30% 30% 4px 4px" }}
               >
                 {/* Patrón dentro del arco */}
                 <div className="absolute inset-0 arabic-pattern opacity-10" />
                 <div
                   className="absolute inset-0"
-                  style={{ background: "linear-gradient(180deg, rgba(26,16,9,0) 50%, rgba(26,16,9,0.9) 100%)" }}
+                  style={{ background: "linear-gradient(180deg, transparent 50%, var(--bg-mid) 100%)" }}
                 />
                 {/* Texto placeholder */}
                 <div className="absolute inset-0 flex items-center justify-center">

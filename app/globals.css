@@ -26,14 +26,29 @@
   --dorado:   #aa9531;
 }
 
+/* ── Tema Café (default) ──────────────────────────────── */
+:root {
+  --bg-deep:  #1a1009;
+  --bg-mid:   #2b1b12;
+  --bg-card:  #1f1208;
+}
+
+/* ── Tema Azul — mayor especificidad con html selector ── */
+html[data-theme="azul"] {
+  --bg-deep:  #091520 !important;
+  --bg-mid:   #112233 !important;
+  --bg-card:  #0d1c2e !important;
+}
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: #1a1009;
+  background-color: var(--bg-deep);
   color: #e5d9c6;
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.5s ease;
 }
 
 /* ── Arabic geometric pattern ─────────────────────────── */
