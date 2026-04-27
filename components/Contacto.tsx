@@ -77,7 +77,7 @@ export default function Contacto() {
                 {
                   Icon: Phone,
                   title: "WhatsApp",
-                  lines: ["+57 (300) 000-0000"],
+                  lines: ["+57 305 4216343"],
                 },
                 {
                   Icon: Mail,

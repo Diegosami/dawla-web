@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 
 function useInView(threshold = 0.1) {
   const ref  = useRef<HTMLDivElement>(null);
@@ -15,14 +16,14 @@ function useInView(threshold = 0.1) {
 
 // Alturas variables para dar sensación de masonry
 const items = [
-  { id: 1, label: "Bombones de temporada",    h: "h-72",  color: "#c1968e" },
-  { id: 2, label: "Tabletas artesanales",     h: "h-48",  color: "#345263" },
-  { id: 3, label: "Box regalo premium",       h: "h-96",  color: "#2b1b12" },
-  { id: 4, label: "Detalle trabajo a mano",   h: "h-56",  color: "#a36529" },
-  { id: 5, label: "Ingredientes de origen",   h: "h-40",  color: "#aa9531" },
-  { id: 6, label: "Trufas Baharat",           h: "h-72",  color: "#c1968e" },
-  { id: 7, label: "Taller Dawla",             h: "h-52",  color: "#345263" },
-  { id: 8, label: "Cacao colombiano",         h: "h-64",  color: "#2b1b12" },
+  { id: 1, label: "Detalles que enamoran",    h: "h-72",  image: "/dawla.chocolateria_DMwHFYzMs-6.jpg" },
+  { id: 2, label: "Caja Premium",             h: "h-48",  image: "/dawla.chocolateria_DP4A7JQkZIr.jpg" },
+  { id: 3, label: "Nuestros Bombones",        h: "h-96",  image: "/dawla.chocolateria_DQw18QsEbHu.jpg" },
+  { id: 4, label: "Arte en chocolate",        h: "h-56",  image: "/dawla.chocolateria_DRFqbi6EQeu.jpg" },
+  { id: 5, label: "Sabores únicos",           h: "h-40",  image: "/dawla.chocolateria_DRI6lltDKjR.jpg" },
+  { id: 6, label: "Presentación Premium",     h: "h-72",  image: "/dawla.chocolateria_DSd0KfLlVCL.jpg" },
+  { id: 7, label: "Experiencia Sensorial",    h: "h-52",  image: "/dawla.chocolateria_DUwQQUskfW0.jpg" },
+  { id: 8, label: "Garden Edition",           h: "h-64",  image: "/garden-edition.jpg" },
 ];
 
 export default function Galeria() {
@@ -64,20 +65,27 @@ export default function Galeria() {
               }`}
               style={{ transitionDelay: `${i * 60 + 200}ms` }}
             >
-              {/* Imagen placeholder */}
+              {/* Imagen o placeholder */}
               <div
-                className={`${item.h} relative w-full`}
-                style={{ background: `linear-gradient(135deg, ${item.color}33, ${item.color}66)` }}
+                className={`${item.h} relative w-full overflow-hidden`}
+                style={item.color ? { background: `linear-gradient(135deg, ${item.color}33, ${item.color}66)` } : {}}
               >
-                <div className="absolute inset-0 arabic-pattern-sm opacity-15" />
+                {item.image ? (
+                  <Image src={item.image} alt={item.label} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                ) : (
+                  <>
+                    <div className="absolute inset-0 arabic-pattern-sm opacity-15" />
+                    {/* Icono central */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity">
+                      <span className="text-dorado text-3xl">✦</span>
+                    </div>
+                  </>
+                )}
+                
                 <div
                   className="absolute inset-0"
                   style={{ background: `linear-gradient(180deg, transparent 50%, rgba(26,16,9,0.85) 100%)` }}
                 />
-                {/* Icono central */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity">
-                  <span className="text-dorado text-3xl">✦</span>
-                </div>
 
                 {/* Label en hover */}
                 <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
@@ -96,7 +104,7 @@ export default function Galeria() {
         {/* CTA */}
         <div className={`text-center mt-16 transition-all duration-700 delay-500 ${inView ? "opacity-100" : "opacity-0"}`}>
           <p className="font-sans text-xs text-beige/40 tracking-wider">
-            Las fotografías reales serán añadidas próximamente.
+            Síguenos en nuestras redes para más inspiración.
           </p>
         </div>
       </div>

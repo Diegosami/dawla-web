@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   title: "Dawla · Chocolatería Premium Bogotá",
   description:
     "Dawla es una chocolatería artesanal premium en Bogotá, Colombia. Creaciones únicas con cacao colombiano de origen, inspiradas en la riqueza cultural de Oriente Medio.",

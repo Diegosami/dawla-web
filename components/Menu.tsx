@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import Link from "next/link";
+import { products } from "@/lib/products";
 
 function useInView(threshold = 0.1) {
   const ref  = useRef<HTMLDivElement>(null);
@@ -13,64 +15,7 @@ function useInView(threshold = 0.1) {
   return { ref, inView };
 }
 
-const categories = ["Todo", "Bombones", "Tabletas", "Trufas", "Temporada"];
-
-const products = [
-  {
-    id: 1,
-    name: "Bombón Rosas del Levante",
-    category: "Bombones",
-    desc: "Ganache de agua de rosas y cardamomo, cubierta en chocolate negro 72%.",
-    price: "$18.000",
-    tag: "Signature",
-    color: "#c1968e",
-  },
-  {
-    id: 2,
-    name: "Trufa Café de Origen",
-    category: "Trufas",
-    desc: "Cacao Tumaco 85% con notas de cereza y especias orientales.",
-    price: "$15.000",
-    tag: "Premium",
-    color: "#aa9531",
-  },
-  {
-    id: 3,
-    name: "Tableta Azul del Nilo",
-    category: "Tabletas",
-    desc: "Chocolate leche con tahini, almendras tostadas y sal marina del Pacífico.",
-    price: "$32.000",
-    tag: "Artesanal",
-    color: "#345263",
-  },
-  {
-    id: 4,
-    name: "Bombón Pistacho Dorado",
-    category: "Bombones",
-    desc: "Praliné de pistacho iraní con hoja de oro comestible, 70% dark.",
-    price: "$22.000",
-    tag: "Lujo",
-    color: "#aa9531",
-  },
-  {
-    id: 5,
-    name: "Trufa Baharat",
-    category: "Trufas",
-    desc: "Mezcla de especias árabes con chocolate blanco y naranja confitada.",
-    price: "$16.000",
-    tag: "Especial",
-    color: "#a36529",
-  },
-  {
-    id: 6,
-    name: "Tableta Gran Reserva",
-    category: "Tabletas",
-    desc: "Cacao Nacional 90% de Huila. Fermentado 7 días. Sin aditivos.",
-    price: "$45.000",
-    tag: "Origen único",
-    color: "#2b1b12",
-  },
-];
+const categories = ["Todo", "Bombones", "Tabletas", "Trufas", "Garden Edition"];
 
 export default function Menu() {
   const { ref, inView } = useInView();
@@ -184,9 +129,12 @@ export default function Menu() {
                   <span className="font-sans text-[10px] tracking-widest uppercase text-dorado/50">
                     {p.category}
                   </span>
-                  <button className="font-sans text-[10px] tracking-widest uppercase text-dorado hover:text-[#c8b04a] transition-colors border-b border-dorado/30 hover:border-dorado pb-px">
-                    Pedir →
-                  </button>
+                  <Link
+                    href={`/productos/${p.slug}`}
+                    className="font-sans text-[10px] tracking-widest uppercase text-dorado hover:text-[#c8b04a] transition-colors border-b border-dorado/30 hover:border-dorado pb-px"
+                  >
+                    Ver producto →
+                  </Link>
                 </div>
               </div>
             </div>

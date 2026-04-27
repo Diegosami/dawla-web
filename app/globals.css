@@ -26,18 +26,11 @@
   --dorado:   #aa9531;
 }
 
-/* ── Tema Café (default) ──────────────────────────────── */
+/* ── Tema Rojo (único) ────────────────────────────────── */
 :root {
-  --bg-deep:  #1a1009;
-  --bg-mid:   #2b1b12;
-  --bg-card:  #1f1208;
-}
-
-/* ── Tema Azul — mayor especificidad con html selector ── */
-html[data-theme="azul"] {
-  --bg-deep:  #150508 !important;
-  --bg-mid:   #2A0D14 !important;
-  --bg-card:  #1E080D !important;
+  --bg-deep:  #150508;
+  --bg-mid:   #2A0D14;
+  --bg-card:  #1E080D;
 }
 
 * { box-sizing: border-box; }
@@ -117,7 +110,7 @@ body {
 
 /* ── Scrollbar ────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #1a1009; }
+::-webkit-scrollbar-track { background: #150508; }
 ::-webkit-scrollbar-thumb { background: #aa9531; border-radius: 3px; }
 
 /* ── Selection ────────────────────────────────────────── */
