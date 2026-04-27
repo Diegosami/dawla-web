@@ -8,10 +8,10 @@ import type { Product } from "@/lib/products";
 import GardenEditionLayout from "./GardenEditionLayout";
 
 const ICON_MAP: Record<string, LucideIcon> = { Citrus, Nut, Wine, Coffee, Flower2, Star, Layers, Leaf };
-function Icon({ name, size, style, className }: { name?: string; size: number; style?: React.CSSProperties; className?: string }) {
+function Icon({ name, size, style, className, strokeWidth }: { name?: string; size: number; style?: React.CSSProperties; className?: string; strokeWidth?: number }) {
   if (!name) return null;
   const C = ICON_MAP[name];
-  return C ? <C size={size} style={style} className={className} /> : null;
+  return C ? <C size={size} style={style} className={className} strokeWidth={strokeWidth} /> : null;
 }
 
 export default function ProductClient({ product }: { product: Product }) {

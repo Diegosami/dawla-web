@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, ShieldCheck, Truck, HeadphonesIcon, MessageCircle, Leaf, Sparkles, Heart, Package, Star, Clock } from "lucide-react";
+import { ArrowLeft, CheckCircle2, ShieldCheck, Truck, HeadphonesIcon, MessageCircle, Leaf, Sparkles, Heart, Package, Star, ArrowRight, Flower2 } from "lucide-react";
 import type { Product, Flavor } from "@/lib/products";
 
 const flavorAccents = ["#e8c34d", "#d4728a", "#c9956b", "#8b6550", "#d4bf8a"];
@@ -34,296 +34,292 @@ export default function GardenEditionLayout({
   };
 
   return (
-    <div className="bg-[#fdfbf7] text-[#332b26] min-h-screen relative selection:bg-[#c5a882] selection:text-white pb-20 md:pb-0">
+    <div className="bg-[#fcfaf7] text-[#332b26] min-h-screen relative selection:bg-[#c5a882] selection:text-white pb-20 md:pb-0">
 
-      {/* ── 1. HERO SECTION ───────────────────────────────────── */}
+      {/* ── 1. HERO SECTION (FULL BLEED) ───────────────────────────────────── */}
       <section className="relative w-full overflow-hidden" style={{ minHeight: "85vh" }}>
-        {/* Decorative corner top-left */}
-        <div className="absolute top-0 left-0 w-[400px] h-[400px] z-10 pointer-events-none hidden md:block opacity-90">
+        
+        {/* Imagen de fondo inmersiva */}
+        <div className="absolute inset-0 z-0">
           <Image 
-            src="/image.png" 
-            alt="Botanical decoration" 
+            src="/garden-edition-pc.png" 
+            alt="Garden Edition Premium Box" 
             fill 
-            className="object-cover" 
-            style={{ objectPosition: "top left", clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
+            className="object-cover"
+            style={{ objectPosition: "center right" }}
+            priority
           />
+          {/* Gradiente para asegurar lectura de texto */}
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(253,251,247,0.9) 0%, rgba(253,251,247,0.7) 40%, transparent 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(253,251,247,0.4) 0%, transparent 40%)" }} />
         </div>
 
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 h-full pt-32 pb-20 relative z-20">
-          <Link href="/#menu" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-[#8c7355] hover:text-[#332b26] transition-colors mb-12">
-            <ArrowLeft size={14} /> Volver
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 h-full pt-32 pb-24 relative flex flex-col justify-center min-h-[85vh] z-10">
+          <Link href="/#menu" className="inline-flex items-center gap-3 font-sans text-xs tracking-widest uppercase text-[#a68a64] hover:text-[#2a1b18] transition-colors mb-16 w-fit bg-white/50 px-4 py-2 rounded-full backdrop-blur-sm border border-[#c5a882]/20">
+            <ArrowLeft size={16} /> Volver a la colección
           </Link>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Texto Hero */}
-            <div className="max-w-xl">
-              <h1 className="font-serif text-6xl md:text-7xl lg:text-8xl font-light leading-[1.1] mb-6 text-[#2a1b18]">
-                Un jardín<br />que se saborea
-              </h1>
-              <p className="font-sans text-xs tracking-[0.3em] uppercase font-semibold text-[#8c7355] mb-4">
-                Chocolatería Premium Colombiana
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-4 mb-6">
+              <span className="w-8 h-[1px] bg-[#c5a882]"></span>
+              <p className="font-sans text-xs tracking-[0.3em] uppercase font-semibold text-[#c5a882]">
+                {product.collection || "Edición Limitada"}
               </p>
-              <p className="font-sans text-sm md:text-base text-[#5c534e] leading-relaxed mb-10 max-w-md">
-                Garden Edition es una edición limitada que celebra la belleza de nuestra tierra y el arte del chocolate.
-              </p>
-              <div className="flex flex-wrap items-center gap-6">
-                <a 
-                  href={waLink} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-[#c5a882] text-white px-8 py-4 rounded-full font-sans text-xs tracking-[0.2em] uppercase font-semibold hover:bg-[#b0926d] transition-colors shadow-lg shadow-[#c5a882]/20"
-                >
-                  Regálasela →
-                </a>
-                <button 
-                  onClick={scrollToFlavors}
-                  className="font-sans text-xs tracking-[0.2em] uppercase text-[#8c7355] hover:text-[#2a1b18] transition-colors"
-                >
-                  Descubrir sabores ›
-                </button>
-              </div>
             </div>
 
-            {/* Imagen Hero */}
-            <div className="relative h-[400px] md:h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl">
-              <Image 
-                src="/garden-edition-pc.png" 
-                alt="Garden Edition" 
-                fill 
-                className="object-cover"
-                style={{ objectPosition: "center right" }}
-                priority
-              />
+            <h1 className="font-serif text-6xl md:text-7xl lg:text-[5.5rem] font-light leading-[1.05] mb-4 text-[#2a1b18] tracking-tight">
+              {product.name}
+            </h1>
+            
+            <div className="flex items-end gap-4 mb-8">
+              <p className="font-sans text-3xl md:text-4xl text-[#a68a64] font-medium tracking-tight">
+                {product.price}
+              </p>
+            </div>
+            
+            <p className="font-sans text-sm md:text-base text-[#5c534e] leading-relaxed mb-12 max-w-lg">
+              Cinco rosas moldeadas a mano. Cinco historias distintas. Una colección diseñada para sorprender a quien merece lo más excepcional.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+              <a 
+                href={waLink} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-[#c5a882] text-white px-10 py-4 font-sans text-xs tracking-widest uppercase font-semibold hover:bg-[#b0926d] transition-colors shadow-xl shadow-[#c5a882]/20 rounded-full"
+              >
+                Comprar Colección
+              </a>
+              
+              <button 
+                onClick={scrollToFlavors}
+                className="font-sans text-xs tracking-widest uppercase text-[#8c7355] hover:text-[#2a1b18] transition-colors flex items-center gap-2 py-4 bg-white/30 backdrop-blur-sm px-6 rounded-full border border-[#c5a882]/20"
+              >
+                <Flower2 size={16} />
+                Descubrir sabores
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 2. CARACTERÍSTICAS (3 COLUMNAS) ──────────────────── */}
-      <section className="py-20 bg-[#f5f0e6]">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12 text-center">
+      {/* ── 2. CARACTERÍSTICAS ──────────────────── */}
+      <section className="py-24 relative z-10 bg-white border-y border-[#f0e8dc]">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+          <div className="grid md:grid-cols-3 gap-16 md:gap-12">
             {/* Item 1 */}
-            <div>
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-8 shadow-md">
-                <Image src="/garden-edition-pc.png" alt="Arte que florece" fill className="object-cover" style={{ objectPosition: "left center" }} />
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-[#fdfbf7] flex items-center justify-center mb-6">
+                <Leaf size={24} strokeWidth={1.5} className="text-[#c5a882]" />
               </div>
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <Leaf size={16} className="text-[#c5a882]" />
-                <h3 className="font-sans text-xs tracking-[0.2em] uppercase font-semibold text-[#2a1b18]">Arte que florece</h3>
-              </div>
-              <p className="font-sans text-sm text-[#5c534e] max-w-xs mx-auto">Ilustraciones inspiradas en los jardines colombianos.</p>
+              <h3 className="font-serif text-2xl text-[#2a1b18] mb-4">Arte botánico</h3>
+              <p className="font-sans text-sm leading-relaxed text-[#5c534e] max-w-[280px]">
+                El diseño de cada rosa es un tributo a la riqueza floral colombiana.
+              </p>
             </div>
             {/* Item 2 */}
-            <div>
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-8 shadow-md">
-                <Image src="/garden-edition-pc.png" alt="Sabores que enamoran" fill className="object-cover" style={{ objectPosition: "center center" }} />
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-[#fdfbf7] flex items-center justify-center mb-6">
+                <Heart size={24} strokeWidth={1.5} className="text-[#c5a882]" />
               </div>
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <Heart size={16} className="text-[#c5a882]" />
-                <h3 className="font-sans text-xs tracking-[0.2em] uppercase font-semibold text-[#2a1b18]">Sabores que enamoran</h3>
-              </div>
-              <p className="font-sans text-sm text-[#5c534e] max-w-xs mx-auto">Bombones artesanales con rellenos suaves e inolvidables.</p>
+              <h3 className="font-serif text-2xl text-[#2a1b18] mb-4">Sabores vivos</h3>
+              <p className="font-sans text-sm leading-relaxed text-[#5c534e] max-w-[280px]">
+                Cinco rellenos distintos que estallan en el paladar con ingredientes de origen.
+              </p>
             </div>
             {/* Item 3 */}
-            <div>
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-8 shadow-md">
-                <Image src="/garden-edition-pc.png" alt="Edición Limitada" fill className="object-cover" style={{ objectPosition: "right center" }} />
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-[#fdfbf7] flex items-center justify-center mb-6">
+                <Package size={24} strokeWidth={1.5} className="text-[#c5a882]" />
               </div>
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <Star size={16} className="text-[#c5a882]" />
-                <h3 className="font-sans text-xs tracking-[0.2em] uppercase font-semibold text-[#2a1b18]">Edición Limitada</h3>
-              </div>
-              <p className="font-sans text-sm text-[#5c534e] max-w-xs mx-auto">Una colección exclusiva para momentos que merecen ser únicos.</p>
+              <h3 className="font-serif text-2xl text-[#2a1b18] mb-4">Listo para regalo</h3>
+              <p className="font-sans text-sm leading-relaxed text-[#5c534e] max-w-[280px]">
+                Caja rígida con acabados de lujo, cinta de seda y tarjeta personalizada incluida.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── 3. DETALLE DE COLECCIÓN Y COTIZADOR ──────────────────────────── */}
-      <section className="py-24 max-w-[1400px] mx-auto px-6 md:px-12">
-        <div className="grid lg:grid-cols-12 gap-12 items-center mb-16">
-          <div className="lg:col-span-5 lg:pr-8">
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-[#8c7355] mb-2 text-center lg:text-left">Colección Especial</p>
-            <h2 className="font-serif text-5xl md:text-6xl font-light text-[#2a1b18] mb-12 text-center lg:text-left">Garden Edition</h2>
-            
-            <div className="space-y-8 mb-12">
-              {[
-                { icon: <Leaf size={20} strokeWidth={1.5} />, title: "Cacao Colombiano", desc: "De origen único y sostenible." },
-                { icon: <Package size={20} strokeWidth={1.5} />, title: "Elaboración Artesanal", desc: "Hecho a mano por maestros chocolateros." },
-                { icon: <Sparkles size={20} strokeWidth={1.5} />, title: "Ingredientes Naturales", desc: "Sin conservantes ni colorantes artificiales." }
-              ].map((item) => (
-                <div key={item.title} className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full border border-[#e6dcd0] flex items-center justify-center flex-shrink-0 text-[#a68a64] bg-white shadow-sm">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-sans text-xs tracking-[0.1em] uppercase font-semibold text-[#2a1b18] mb-1">{item.title}</h4>
-                    <p className="font-sans text-sm text-[#5c534e]">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
+      <section className="py-24 relative z-10 max-w-[1400px] mx-auto px-6 md:px-12">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          
+          <div className="relative order-2 lg:order-1">
+            <div className="aspect-square w-full bg-[#f5f0e6] rounded-3xl overflow-hidden shadow-lg relative">
+               <Image src="/garden-edition-mobile.png" alt="Interior Garden Edition" fill className="object-cover opacity-95" />
+            </div>
+          </div>
+
+          <div className="order-1 lg:order-2 lg:pl-8">
+            <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-[#a68a64] mb-4">La Colección</p>
+            <h2 className="font-serif text-5xl md:text-6xl font-light text-[#2a1b18] mb-8 leading-tight">
+              Una declaración <br/><em className="italic text-[#8c7355]">de lujo.</em>
+            </h2>
+            <p className="font-sans text-sm md:text-base text-[#5c534e] leading-relaxed mb-12 max-w-lg">
+              Esta caja es más que chocolate; es una experiencia curada. Incluye 5 rosas de chocolate, cada una pintada a mano con polvo de oro de 23 quilates y lustres nacarados.
+            </p>
+
+            <div className="space-y-6 mb-12">
+              <div className="flex items-center gap-4">
+                <CheckCircle2 size={18} className="text-[#a68a64]" />
+                <p className="font-sans text-sm text-[#332b26]">Contenido: 5 bombones · 1 por sabor</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <CheckCircle2 size={18} className="text-[#a68a64]" />
+                <p className="font-sans text-sm text-[#332b26]">Peso total: 75 g aprox.</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <CheckCircle2 size={18} className="text-[#a68a64]" />
+                <p className="font-sans text-sm text-[#332b26]">Vida útil: 10 días (sin conservantes)</p>
+              </div>
             </div>
 
-            {/* COTIZADOR ENVÍO */}
-            <div className="p-6 border rounded-xl" style={{ borderColor: "rgba(45, 36, 30, 0.08)", backgroundColor: "rgba(45, 36, 30, 0.02)" }}>
-              <div className="flex items-center gap-2 mb-4">
-                <Truck size={16} className="text-[#a68a64]" />
-                <p className="font-sans text-xs tracking-widest uppercase text-[#8c7355]">Cotizar envío</p>
+            {/* COTIZADOR SENCILLO */}
+            <div className="bg-[#fdfbf7] p-8 rounded-2xl border border-[#f0e8dc]">
+              <div className="flex items-center gap-3 mb-4">
+                <Truck size={18} className="text-[#a68a64]" />
+                <h4 className="font-sans text-sm font-bold tracking-widest uppercase text-[#2a1b18]">Cotizar envío</h4>
               </div>
-              <p className="font-sans text-xs mb-4 leading-relaxed text-[#5c534e]">
+              <p className="font-sans text-xs text-[#5c534e] mb-6">
                 Ingresa tu código postal de 6 dígitos para calcular el costo de entrega a tu ciudad.
               </p>
-              <div className="flex gap-2">
+              
+              <div className="flex flex-col sm:flex-row gap-4">
                 <input 
                   type="text" 
                   maxLength={6}
-                  placeholder="Ej: 110111"
+                  placeholder="Código postal (Ej: 110111)"
                   value={zipCode}
                   onChange={(e) => setZipCode(e.target.value.replace(/[^0-9]/g, ''))}
-                  className="flex-1 bg-white border border-[#e0d8c8] text-[#2a1b18] placeholder-[#a0958a] px-4 py-3 font-sans text-sm outline-none transition-colors focus:border-[#a68a64] rounded-md"
+                  className="flex-1 bg-white border border-[#e0d8c8] text-[#2a1b18] placeholder-[#b0a59a] px-4 py-3 font-sans text-sm outline-none transition-colors focus:border-[#a68a64] rounded-lg"
                 />
                 <button 
                   onClick={calculateShipping}
                   disabled={loadingShipping}
-                  className="px-6 border border-[#a68a64]/30 bg-[#a68a64]/10 text-[#a68a64] font-sans text-xs font-semibold tracking-widest uppercase transition-colors rounded-md hover:bg-[#a68a64]/20"
+                  className="bg-[#2a1b18] text-white px-8 py-3 font-sans text-xs tracking-widest uppercase transition-colors hover:bg-[#3a2824] rounded-lg"
                 >
-                  {loadingShipping ? "..." : "Calcular"}
+                  {loadingShipping ? "Calculando..." : "Calcular"}
                 </button>
               </div>
-              {shippingError && <p className="font-sans text-xs text-red-500 mt-3">{shippingError}</p>}
+              
+              {shippingError && <p className="font-sans text-xs text-red-500 mt-4">{shippingError}</p>}
+              
               {shippingCost !== null && (
-                <div className="mt-4 pt-4 border-t border-[#332b26]/10 flex justify-between items-center">
-                  <p className="font-sans text-xs text-[#5c534e]">Costo estimado:</p>
-                  <p className="font-sans text-lg font-semibold text-[#a68a64]">${shippingCost.toLocaleString("es-CO")}</p>
+                <div className="mt-6 pt-6 border-t border-[#f0e8dc] flex justify-between items-center">
+                  <p className="font-sans text-xs uppercase tracking-widest text-[#5c534e]">Costo estimado:</p>
+                  <p className="font-serif text-2xl text-[#a68a64]">${shippingCost.toLocaleString("es-CO")}</p>
                 </div>
               )}
             </div>
           </div>
-          
-          <div className="lg:col-span-7">
-            <div className="relative h-[500px] md:h-[700px] w-full rounded-[2rem] overflow-hidden shadow-xl">
-              <Image src="/garden-edition-pc.png" alt="Garden Edition Box" fill className="object-cover" style={{ objectPosition: "60% center" }} />
-            </div>
-          </div>
+
         </div>
       </section>
 
-      {/* ── 4. JARDÍN DE SABORES ─────────────────────────────────── */}
-      <section id="sabores" className="py-24 bg-white border-y border-[#f0e8dc]">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-light text-[#2a1b18] mb-4">
+      {/* ── 4. JARDÍN DE SABORES (GRID LIMPIO) ─────────────────────────────────── */}
+      <section id="sabores" className="py-24 bg-white border-y border-[#f0e8dc] relative z-10">
+        
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 text-center mb-24">
+          <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-[#a68a64] mb-4">Degustación</p>
+          <h2 className="font-serif text-5xl md:text-6xl font-light text-[#2a1b18] mb-8">
             Jardín de Sabores
           </h2>
-          <div className="flex justify-center items-center gap-4 mb-8 text-[#c5a882]">
-            <span className="w-12 h-px bg-[#c5a882]"></span>
-            <Leaf size={16} />
-            <span className="w-12 h-px bg-[#c5a882]"></span>
-          </div>
+          <div className="w-px h-16 bg-[#c5a882]/40 mx-auto mb-8"></div>
           <p className="font-sans text-sm md:text-base leading-relaxed max-w-2xl mx-auto text-[#5c534e]">
-            Cada bombón fue pensado de forma independiente. Cada uno tiene su propio relleno, su propio carácter, su propia razón de estar ahí. Juntos, forman la caja perfecta.
+            Un viaje sensorial a través de cinco composiciones magistrales. Cada bombón esconde un universo de texturas y notas aromáticas diseñadas para detener el tiempo.
           </p>
         </div>
 
-        {product.flavors?.map((flavor, i) => {
-          const isEven = i % 2 === 0;
-          const flavorColor = flavorAccents[i] || "#c5a882";
-          
-          return (
-            <div key={flavor.name} className="relative py-20 border-t border-[#f0e8dc] overflow-hidden">
-              {/* Gran número de fondo */}
-              <div 
-                className="absolute select-none pointer-events-none hidden md:block"
-                style={{ 
-                  left: isEven ? 'auto' : '10%',
-                  right: isEven ? '10%' : 'auto',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  fontSize: '20rem', 
-                  lineHeight: 0.8, 
-                  color: flavorColor, 
-                  opacity: 0.05,
-                  fontFamily: 'var(--font-serif)',
-                  letterSpacing: '-0.05em'
-                }}
-              >
-                {String(i + 1).padStart(2, "0")}
-              </div>
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12 flex flex-col gap-24">
+          {product.flavors?.map((flavor, i) => {
+            const isEven = i % 2 === 0;
+            const flavorColor = flavorAccents[i] || "#c5a882";
+            
+            return (
+              <div key={flavor.name} className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+                
+                {/* IMAGEN */}
+                <div className={`relative ${isEven ? "md:order-1" : "md:order-2"}`}>
+                  <div className="aspect-square relative rounded-3xl overflow-hidden bg-[#f5f0e6] shadow-md">
+                    <Image src="/garden-edition-mobile.png" alt={flavor.name} fill className="object-cover opacity-90" />
+                  </div>
+                </div>
 
-              <div className="relative max-w-5xl mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-center">
-                <div className={`${isEven ? "md:order-1" : "md:order-2"}`}>
-                  <p className="font-sans text-[10px] tracking-[0.4em] uppercase font-medium mb-4" style={{ color: flavorColor }}>
-                    Rosa N° {i + 1}
-                  </p>
-                  <h3 className="font-serif text-4xl md:text-5xl font-medium mb-6 text-[#2a1b18]">
+                {/* TEXTO */}
+                <div className={`relative ${isEven ? "md:order-2" : "md:order-1"}`}>
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="font-serif text-2xl italic" style={{ color: flavorColor }}>0{i + 1}</span>
+                    <span className="w-8 h-[1px] bg-[#e6dcd0]"></span>
+                    <span className="font-sans text-[10px] tracking-widest uppercase text-[#8c8078]">Rosa</span>
+                  </div>
+                  
+                  <h3 className="font-serif text-4xl text-[#2a1b18] mb-6">
                     {flavor.name}
                   </h3>
+                  
                   <div className="flex flex-wrap gap-2 mb-8">
                     {flavor.sensorNotes.map(note => (
-                      <span key={note} className="font-sans text-[10px] tracking-widest uppercase px-3 py-1 border border-[#e6dcd0] rounded-full text-[#8c7355]">
+                      <span key={note} className="font-sans text-[10px] tracking-widest uppercase px-4 py-1.5 rounded-full border border-[#f0e8dc] text-[#8c7355] bg-[#fcfaf7]">
                         {note}
                       </span>
                     ))}
                   </div>
-                  <p className="font-sans text-sm text-[#5c534e] leading-relaxed mb-6">
+                  
+                  <p className="font-sans text-sm text-[#5c534e] leading-loose mb-8">
                     {flavor.story}
                   </p>
-                  <p className="font-sans text-xs text-[#8c8078] italic">
-                    {flavor.desc}
-                  </p>
+                  
+                  <div className="p-6 bg-[#fcfaf7] rounded-xl border border-[#f0e8dc]">
+                    <p className="font-sans text-xs text-[#5c534e] leading-relaxed">
+                      <strong className="text-[#2a1b18] font-semibold">Detalle:</strong> {flavor.desc}
+                    </p>
+                  </div>
                 </div>
 
-                <div className={`relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg ${isEven ? "md:order-2" : "md:order-1"}`}>
-                  <Image src="/garden-edition-mobile.png" alt={flavor.name} fill className="object-cover" />
-                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </section>
 
-      {/* ── 5. FINAL CTA CON BORDES BOTÁNICOS ────────────────── */}
-      <section className="relative py-32 bg-[#fdfbf7] overflow-hidden border-b border-[#f0e8dc]">
-        {/* Botanical borders left and right using full mockup image cropped */}
-        <div className="absolute bottom-0 left-0 w-[400px] h-[300px] opacity-80 pointer-events-none hidden md:block">
-          <Image src="/image.png" alt="Botanical left" fill className="object-cover" style={{ objectPosition: "bottom left" }} />
-        </div>
-        <div className="absolute bottom-0 right-0 w-[400px] h-[300px] opacity-80 pointer-events-none hidden md:block">
-          <Image src="/image.png" alt="Botanical right" fill className="object-cover" style={{ objectPosition: "bottom right" }} />
-        </div>
-
-        <div className="relative z-10 text-center max-w-2xl mx-auto px-6">
-          <h2 className="font-serif text-4xl md:text-5xl font-light text-[#2a1b18] mb-6 leading-tight">
-            Haz de cada momento<br />un recuerdo inolvidable
+      {/* ── 5. FINAL CTA ────────────────── */}
+      <section className="py-32 bg-[#fcfaf7] text-center">
+        <div className="max-w-2xl mx-auto px-6">
+          <Flower2 size={32} strokeWidth={1.5} className="mx-auto text-[#c5a882] mb-8" />
+          <h2 className="font-serif text-4xl md:text-5xl font-light text-[#2a1b18] mb-8 leading-tight">
+            El detalle perfecto<br /><em className="italic text-[#8c7355]">para ella</em>
           </h2>
-          <p className="font-sans text-sm text-[#5c534e] mb-10">
-            Garden Edition, una experiencia que florece en cada bocado.
+          <p className="font-sans text-sm text-[#5c534e] mb-12">
+            La caja de Garden Edition se agota rápidamente. Asegura la tuya hoy mismo.
           </p>
           <a 
             href={waLink} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex bg-[#c5a882] text-white px-10 py-4 rounded-full font-sans text-xs tracking-[0.2em] uppercase font-semibold hover:bg-[#b0926d] transition-colors shadow-xl shadow-[#c5a882]/20"
+            className="inline-flex bg-[#2a1b18] text-white px-10 py-4 font-sans text-xs tracking-widest uppercase font-semibold hover:bg-[#3a2824] transition-colors rounded-lg shadow-lg"
           >
-            Regálasela →
+            Hacer mi pedido
           </a>
         </div>
       </section>
 
       {/* ── 6. TRUST BADGES FOOTER ───────────────────────────── */}
-      <section className="py-12 bg-white">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-wrap justify-center gap-x-16 gap-y-8">
+      <section className="py-16 bg-white border-t border-[#f0e8dc]">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-wrap justify-center gap-x-16 gap-y-10">
           {[
-            { icon: <ShieldCheck size={20} strokeWidth={1.5} className="text-[#a68a64]"/>, title: "Pago Seguro", desc: "Transacciones protegidas" },
-            { icon: <CheckCircle2 size={20} strokeWidth={1.5} className="text-[#a68a64]"/>, title: "Compra 100% Segura", desc: "Tus datos siempre protegidos" },
-            { icon: <Truck size={20} strokeWidth={1.5} className="text-[#a68a64]"/>, title: "Envíos a Colombia", desc: "Con seguimiento en línea" },
-            { icon: <HeadphonesIcon size={20} strokeWidth={1.5} className="text-[#a68a64]"/>, title: "Atención Personalizada", desc: "Estamos para ayudarte" }
+            { icon: <ShieldCheck size={24} strokeWidth={1.5} className="text-[#a68a64]"/>, title: "Pago Seguro", desc: "Transacciones encriptadas" },
+            { icon: <Package size={24} strokeWidth={1.5} className="text-[#a68a64]"/>, title: "Empaque de Lujo", desc: "Listo para regalar" },
+            { icon: <Truck size={24} strokeWidth={1.5} className="text-[#a68a64]"/>, title: "Envíos", desc: "Nacionales y Locales" },
+            { icon: <MessageCircle size={24} strokeWidth={1.5} className="text-[#a68a64]"/>, title: "Asesoría", desc: "Compra vía WhatsApp" }
           ].map((item) => (
-            <div key={item.title} className="flex items-center gap-4">
-              {item.icon}
+            <div key={item.title} className="flex items-center gap-4 max-w-[200px]">
+              <div className="flex-shrink-0">
+                {item.icon}
+              </div>
               <div>
-                <p className="font-sans text-[10px] tracking-[0.1em] uppercase font-bold text-[#2a1b18]">{item.title}</p>
-                <p className="font-sans text-[10px] text-[#8c8078]">{item.desc}</p>
+                <p className="font-sans text-xs font-bold text-[#2a1b18] mb-1">{item.title}</p>
+                <p className="font-sans text-[10px] text-[#8c8078] leading-tight">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -331,18 +327,18 @@ export default function GardenEditionLayout({
       </section>
       
       {/* ── STICKY CTA MOBILE ────────────────────────────────── */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#f0e8dc] p-4 shadow-[0_-10px_20px_rgba(0,0,0,0.05)]">
-        <div className="flex justify-between items-center mb-3">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#f0e8dc] p-4 shadow-[0_-10px_20px_rgba(42,27,24,0.05)]">
+        <div className="flex justify-between items-center mb-4">
           <p className="font-serif text-[#2a1b18] text-lg">{product.name}</p>
-          <p className="font-sans font-bold text-[#c5a882]">{product.price}</p>
+          <p className="font-sans text-sm font-bold text-[#c5a882]">{product.price}</p>
         </div>
         <a 
           href={waLink} 
           target="_blank" 
           rel="noopener noreferrer"
-          className="w-full flex items-center justify-center gap-2 bg-[#c5a882] text-white px-6 py-3 rounded-full font-sans text-[10px] tracking-[0.2em] uppercase font-semibold"
+          className="w-full flex items-center justify-center gap-2 bg-[#2a1b18] text-white px-6 py-3 font-sans text-[10px] tracking-[0.2em] uppercase font-semibold rounded-lg"
         >
-          <MessageCircle size={14} /> Regálasela
+           Asegurar regalo <ArrowRight size={14} />
         </a>
       </div>
     </div>
