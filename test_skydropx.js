@@ -1,7 +1,10 @@
-const fs = require('fs');
-
 async function test() {
   const token = process.argv[2];
+
+  if (!token) {
+    console.error("Usage: node test_skydropx.js <access-token>");
+    process.exit(1);
+  }
 
   const payload = {
     address_from: {

@@ -37,7 +37,7 @@ export default function Header({ isGarden = false }: { isGarden?: boolean }) {
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0">
-          <DawlaLogo className="h-9 w-auto" fill={isGarden ? "#332b26" : "var(--dorado)"} />
+          <DawlaLogo className="h-9 w-auto" fill="var(--dorado)" />
         </Link>
 
         {/* Desktop nav — centrado absolutamente */}

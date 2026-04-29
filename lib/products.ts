@@ -156,7 +156,7 @@ export const products: Product[] = [
     tag: "Edición Limitada",
     color: "#c1968e",
     image: "/garden-edition",
-    icon: "Flower2",
+    icon: "Leaf",
     ingredients: [
       "Chocolate fino de origen (blanco, ruby, leche y negro 72%)",
       "Pulpa de piña natural colombiana",
@@ -209,7 +209,7 @@ export const products: Product[] = [
       },
       {
         name: "Vainilla",
-        icon: "Flower2",
+        icon: "Leaf",
         sensorNotes: ["Floral", "Puro", "Cremoso", "Delicado"],
         story: "La vainilla pura — no el extracto sintético que encontramos en todo — tiene una calidez que es casi imposible de ignorar. La nuestra viene de Madagascar. Para la mamá con el gusto más refinado.",
         desc: "Ganache de vainilla natural en vaina Madagascar en chocolate blanco artesanal con lustre nacarado.",

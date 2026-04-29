@@ -14,8 +14,16 @@ function useInView(threshold = 0.1) {
   return { ref, inView };
 }
 
+type GalleryItem = {
+  id: number;
+  label: string;
+  h: string;
+  image?: string;
+  color?: string;
+};
+
 // Alturas variables para dar sensación de masonry
-const items = [
+const items: GalleryItem[] = [
   { id: 1, label: "Detalles que enamoran",    h: "h-72",  image: "/dawla.chocolateria_DMwHFYzMs-6.jpg" },
   { id: 2, label: "Caja Premium",             h: "h-48",  image: "/dawla.chocolateria_DP4A7JQkZIr.jpg" },
   { id: 3, label: "Nuestros Bombones",        h: "h-96",  image: "/dawla.chocolateria_DQw18QsEbHu.jpg" },
@@ -71,7 +79,7 @@ export default function Galeria() {
                 style={item.color ? { background: `linear-gradient(135deg, ${item.color}33, ${item.color}66)` } : {}}
               >
                 {item.image ? (
-                  <Image src={item.image} alt={item.label} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image src={item.image} alt={item.label} fill sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                 ) : (
                   <>
                     <div className="absolute inset-0 arabic-pattern-sm opacity-15" />

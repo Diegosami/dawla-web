@@ -44,9 +44,9 @@ export default function Hero() {
           Bogotá · Colombia
         </p>
 
-        {/* Logo — wrapper para fade, SVG interno para float */}
-        <div className="animate-fade-in mb-10 w-full" style={{ maxWidth: "460px", animationDelay: "0.3s" }}>
-          <DawlaLogo className="w-full h-auto animate-float" />
+        {/* Logo */}
+        <div className="mb-10 w-full" style={{ maxWidth: "460px" }}>
+          <DawlaLogo className="w-full h-auto" />
         </div>
 
         {/* Divisor ornamental */}

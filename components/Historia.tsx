@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import Image from "next/image";
 
 function useInView(threshold = 0.2) {
   const ref  = useRef<HTMLDivElement>(null);

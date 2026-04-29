@@ -2,9 +2,9 @@
 
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import { Flower2, Citrus, Nut, Wine, Coffee, type LucideIcon } from "lucide-react";
+import { Citrus, Nut, Wine, Coffee, Leaf, type LucideIcon } from "lucide-react";
 
-const ICON_MAP: Record<string, LucideIcon> = { Citrus, Nut, Wine, Coffee, Flower2 };
+const ICON_MAP: Record<string, LucideIcon> = { Citrus, Nut, Wine, Coffee, Leaf };
 function FlavorIcon({ name, size, style, className }: { name: string; size: number; style?: React.CSSProperties; className?: string }) {
   const C = ICON_MAP[name];
   return C ? <C size={size} style={style} className={className} /> : null;
@@ -69,7 +69,7 @@ export default function GardenEdition() {
             Dawla · Chocolatería Premium · 2026
           </p>
           <div className="ornament-divider max-w-xs mx-auto mt-6">
-            <Flower2 size={14} style={{ color: "#c1968e" }} />
+            <span className="h-px w-12 bg-[#c1968e]/40" aria-hidden="true" />
           </div>
         </div>
 
@@ -135,7 +135,6 @@ export default function GardenEdition() {
 
             <div className="space-y-4 mb-10">
               {flavors.map((f, i) => {
-                const Icon = f.icon;
                 return (
                   <Link
                     key={f.name}
@@ -159,7 +158,7 @@ export default function GardenEdition() {
                       </p>
                     </div>
                     <div className="ml-auto flex-shrink-0 flex items-center">
-                      <Flower2 size={12} className="transition-colors duration-300" style={{ color: "rgba(193,150,142,0.2)" }} />
+                      <span className="h-px w-5 bg-[#c1968e]/20 transition-colors duration-300 group-hover:bg-[#c1968e]/50" aria-hidden="true" />
                     </div>
                   </Link>
                 );

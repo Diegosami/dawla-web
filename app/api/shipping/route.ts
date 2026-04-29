@@ -1,5 +1,32 @@
 import { NextResponse } from "next/server";
 
+type ShippingRequestBody = {
+  zipTo?: string;
+  cityTo?: string;
+  stateTo?: string;
+  neighborhoodTo?: string;
+};
+
+type SkydropxAuthResponse = {
+  access_token?: string;
+};
+
+type SkydropxRate = {
+  id?: string;
+  success?: boolean;
+  total?: string | number;
+  provider_display_name?: string;
+  provider_service_name?: string;
+  currency_code?: string;
+  days?: number;
+};
+
+type SkydropxQuotationResponse = {
+  id?: string;
+  is_completed?: boolean;
+  rates?: SkydropxRate[];
+};
+
 /* ── Mapa de prefijos postales Colombia → Departamento / Ciudad ──── */
 const CO_POSTAL_MAP: Record<string, { area1: string; area2: string }> = {
   "11": { area1: "Bogotá D.C.", area2: "Bogotá" },
@@ -32,7 +59,7 @@ function lookupPostal(zip: string): { area1: string; area2: string } {
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const body = (await req.json()) as ShippingRequestBody;
     const { zipTo, cityTo, stateTo, neighborhoodTo } = body;
 
     if (!zipTo) {
@@ -44,6 +71,13 @@ export async function POST(req: Request) {
 
     const API_KEY = process.env.SKYDROPX_API_KEY;
     const API_SECRET = process.env.SKYDROPX_API_SECRET;
+
+    if (!API_KEY || !API_SECRET) {
+      return NextResponse.json(
+        { error: "Credenciales de Skydropx no configuradas." },
+        { status: 500 }
+      );
+    }
 
     // 1. Obtener Token OAuth
     const authRes = await fetch(
@@ -63,8 +97,12 @@ export async function POST(req: Request) {
       const err = await authRes.text();
       throw new Error("No se pudo autenticar con Skydropx: " + err);
     }
-    const authData = await authRes.json();
+    const authData = (await authRes.json()) as SkydropxAuthResponse;
     const token = authData.access_token;
+
+    if (!token) {
+      throw new Error("Skydropx no devolvió token de acceso.");
+    }
 
     // 2. Resolver dirección destino desde código postal
     const destLookup = lookupPostal(zipTo);
@@ -120,7 +158,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as SkydropxQuotationResponse;
 
     // 4. Si is_completed=false, polling con GET
     const quotationId = data.id;
@@ -140,14 +178,14 @@ export async function POST(req: Request) {
       );
 
       if (getRes.ok) {
-        finalData = await getRes.json();
+        finalData = (await getRes.json()) as SkydropxQuotationResponse;
       }
     }
 
     // 5. Extraer rates exitosos
     const rates = (finalData.rates || [])
-      .filter((r: any) => r.success && r.total)
-      .map((r: any) => ({
+      .filter((r) => r.success && r.total)
+      .map((r) => ({
         id: r.id,
         carrier: r.provider_display_name,
         service: r.provider_service_name,
@@ -162,10 +200,13 @@ export async function POST(req: Request) {
       rates,
       raw_rates_count: (finalData.rates || []).length,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Shipping API Error:", error);
+    const message =
+      error instanceof Error ? error.message : "Error interno del servidor.";
+
     return NextResponse.json(
-      { error: error.message || "Error interno del servidor." },
+      { error: message },
       { status: 500 }
     );
   }

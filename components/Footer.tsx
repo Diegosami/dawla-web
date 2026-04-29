@@ -31,7 +31,7 @@ export default function Footer({ isGarden = false }: { isGarden?: boolean }) {
         <div className="py-16 grid md:grid-cols-3 gap-12 items-start">
           {/* Logo + tagline */}
           <div className="flex flex-col items-start gap-4">
-            <DawlaLogo className="h-9 w-auto" fill={isGarden ? "#332b26" : "var(--dorado)"} />
+            <DawlaLogo className="h-9 w-auto" fill="var(--dorado)" />
             <p className={`font-serif text-base italic leading-relaxed max-w-[200px] ${isGarden ? 'text-[#5c534e]' : 'text-beige/50'}`}>
               El arte del chocolate, elevado a ritual.
             </p>

@@ -3,11 +3,20 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, MessageCircle, Package, Clock, ChevronDown, Citrus, Nut, Wine, Coffee, Flower2, Star, Layers, Leaf, Truck, type LucideIcon } from "lucide-react";
+import { ArrowLeft, MessageCircle, Package, Clock, ChevronDown, Citrus, Nut, Wine, Coffee, Star, Layers, Leaf, Truck, type LucideIcon } from "lucide-react";
 import type { Product } from "@/lib/products";
 import GardenEditionLayout from "./GardenEditionLayout";
 
-const ICON_MAP: Record<string, LucideIcon> = { Citrus, Nut, Wine, Coffee, Flower2, Star, Layers, Leaf };
+type ShippingRate = {
+  total?: string | number;
+};
+
+type ShippingResponse = {
+  error?: string;
+  rates?: ShippingRate[];
+};
+
+const ICON_MAP: Record<string, LucideIcon> = { Citrus, Nut, Wine, Coffee, Star, Layers, Leaf };
 function Icon({ name, size, style, className, strokeWidth }: { name?: string; size: number; style?: React.CSSProperties; className?: string; strokeWidth?: number }) {
   if (!name) return null;
   const C = ICON_MAP[name];
@@ -39,13 +48,15 @@ export default function ProductClient({ product }: { product: Product }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ zipTo: zipCode })
       });
-      const data = await res.json();
+      const data = (await res.json()) as ShippingResponse;
       if (!res.ok) throw new Error(data.error || "Error al cotizar.");
       
       // La API devuelve { rates: [...], quotation_id, is_completed }
       const rates = data.rates || [];
       if (rates.length > 0) {
-        const totals = rates.map((r: any) => parseFloat(r.total || "0")).filter((v: number) => v > 0);
+        const totals = rates
+          .map((r) => Number.parseFloat(String(r.total || "0")))
+          .filter((v) => v > 0);
         if (totals.length > 0) {
           setShippingCost(Math.min(...totals));
         } else {
@@ -54,8 +65,9 @@ export default function ProductClient({ product }: { product: Product }) {
       } else {
         throw new Error("Sin cobertura en esta zona. Escríbenos por WhatsApp para coordinar tu envío.");
       }
-    } catch (err: any) {
-      setShippingError(err.message || "Error al conectar con la transportadora.");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Error al conectar con la transportadora.";
+      setShippingError(message);
     } finally {
       setLoadingShipping(false);
     }
@@ -159,7 +171,7 @@ export default function ProductClient({ product }: { product: Product }) {
             <div>
               {product.story && (
                 <p className={`font-serif text-lg md:text-xl font-light italic max-w-xl leading-relaxed ${isGarden ? 'text-[#5c534e]' : 'text-beige/60'}`}>
-                  "{product.story}"
+                  &ldquo;{product.story}&rdquo;
                 </p>
               )}
             </div>
@@ -390,7 +402,7 @@ export default function ProductClient({ product }: { product: Product }) {
               <MessageCircle size={16} />
               {isGarden ? "Regálasela · Pedir por WhatsApp" : "Pedir por WhatsApp"}
             </a>
-            <a
+            <Link
               href="/#contacto"
               className={`inline-flex items-center justify-center gap-3 px-8 py-4 border font-sans text-xs font-semibold tracking-[0.2em] uppercase transition-colors duration-300 ${isGarden ? 'hover:bg-white' : ''}`}
               style={{ 
@@ -401,7 +413,7 @@ export default function ProductClient({ product }: { product: Product }) {
             >
               <Package size={15} />
               {isGarden ? "Consultar disponibilidad" : "Pedido personalizado"}
-            </a>
+            </Link>
           </div>
           </div> {/* <- Cierre del contenedor flex flex-col gap-6 */}
 
@@ -415,8 +427,6 @@ export default function ProductClient({ product }: { product: Product }) {
       {isGarden && product.flavors && (() => {
         // Colores sutiles por sabor — solo para el acento lateral
         const flavorAccents = ["#e8c34d", "#d4728a", "#c9956b", "#8b6550", "#d4bf8a"];
-        // Emojis florales/botánicos decorativos por sabor
-        const flowerEmojis = ["🌺", "🌹", "🥃", "☕", "🌸"];
         
         return (
         <section style={{ backgroundColor: "#faf8f2", color: "#2d241e", overflow: "hidden" }}>

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, ShieldCheck, Truck, HeadphonesIcon, MessageCircle, Leaf, Sparkles, Heart, Package, Star, ArrowRight, Flower2 } from "lucide-react";
-import type { Product, Flavor } from "@/lib/products";
+import { ArrowLeft, CheckCircle2, ShieldCheck, Truck, MessageCircle, Leaf, Heart, Package, ArrowRight } from "lucide-react";
+import type { Product } from "@/lib/products";
 
 const flavorAccents = ["#e8c34d", "#d4728a", "#c9956b", "#8b6550", "#d4bf8a"];
 
@@ -45,6 +45,7 @@ export default function GardenEditionLayout({
             src="/garden-edition-pc.png" 
             alt="Garden Edition Premium Box" 
             fill 
+            sizes="100vw"
             className="object-cover"
             style={{ objectPosition: "center right" }}
             priority
@@ -53,13 +54,16 @@ export default function GardenEditionLayout({
           <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(253,251,247,0.9) 0%, rgba(253,251,247,0.7) 40%, transparent 100%)" }} />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(253,251,247,0.4) 0%, transparent 40%)" }} />
         </div>
+        <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_18%_22%,rgba(197,168,130,0.18),transparent_34%),radial-gradient(circle_at_82%_78%,rgba(217,95,110,0.12),transparent_30%)]" aria-hidden="true" />
+        <div className="absolute inset-x-6 bottom-8 z-[2] hidden h-px bg-gradient-to-r from-transparent via-[#a68a64]/60 to-transparent md:block" aria-hidden="true" />
 
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 h-full pt-32 pb-24 relative flex flex-col justify-center min-h-[85vh] z-10">
           <Link href="/#menu" className="inline-flex items-center gap-3 font-sans text-xs tracking-widest uppercase text-[#a68a64] hover:text-[#2a1b18] transition-colors mb-16 w-fit bg-white/50 px-4 py-2 rounded-full backdrop-blur-sm border border-[#c5a882]/20">
             <ArrowLeft size={16} /> Volver a la colección
           </Link>
 
-          <div className="max-w-2xl">
+          <div className="relative max-w-2xl">
+            <div className="absolute -left-6 -top-8 hidden h-[calc(100%+4rem)] w-px bg-gradient-to-b from-transparent via-[#c5a882]/70 to-transparent md:block" aria-hidden="true" />
             <div className="flex items-center gap-4 mb-6">
               <span className="w-8 h-[1px] bg-[#c5a882]"></span>
               <p className="font-sans text-xs tracking-[0.3em] uppercase font-semibold text-[#c5a882]">
@@ -93,9 +97,8 @@ export default function GardenEditionLayout({
               
               <button 
                 onClick={scrollToFlavors}
-                className="font-sans text-xs tracking-widest uppercase text-[#8c7355] hover:text-[#2a1b18] transition-colors flex items-center gap-2 py-4 bg-white/30 backdrop-blur-sm px-6 rounded-full border border-[#c5a882]/20"
+                className="font-sans text-xs tracking-widest uppercase text-[#8c7355] hover:text-[#2a1b18] transition-colors py-4 bg-white/30 backdrop-blur-sm px-6 rounded-full border border-[#c5a882]/20"
               >
-                <Flower2 size={16} />
                 Descubrir sabores
               </button>
             </div>
@@ -103,9 +106,21 @@ export default function GardenEditionLayout({
         </div>
       </section>
 
+
+
       {/* ── 2. CARACTERÍSTICAS ──────────────────── */}
-      <section className="py-24 relative z-10 bg-white border-y border-[#f0e8dc]">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+      <section className="py-24 relative z-10 overflow-hidden bg-white border-y border-[#f0e8dc]">
+        {/* Motivos florales de fondo integrados */}
+        <div className="absolute left-[-15%] md:left-[-5%] top-[-20%] w-[500px] md:w-[700px] opacity-[0.06] mix-blend-multiply pointer-events-none -rotate-12">
+          <Image src="/iconos.svg" alt="" width={941} height={1672} unoptimized className="w-full max-w-none" />
+        </div>
+        <div className="absolute right-[-15%] md:right-[-5%] bottom-[-40%] w-[500px] md:w-[700px] opacity-[0.05] mix-blend-multiply pointer-events-none rotate-12">
+          {/* Desplazamos la imagen internamente para mostrar la parte inferior del SVG */}
+          <Image src="/iconos.svg" alt="" width={941} height={1672} unoptimized className="w-full max-w-none" style={{ transform: 'translateY(-30%)' }} />
+        </div>
+
+        <div className="absolute left-1/2 top-0 h-px w-[min(92vw,1100px)] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#c5a882]/50 to-transparent" aria-hidden="true" />
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
           <div className="grid md:grid-cols-3 gap-16 md:gap-12">
             {/* Item 1 */}
             <div className="flex flex-col items-center text-center">
@@ -146,8 +161,9 @@ export default function GardenEditionLayout({
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           
           <div className="relative order-2 lg:order-1">
+            <div className="absolute -inset-5 rounded-[2rem] border border-[#c5a882]/30" aria-hidden="true" />
             <div className="aspect-square w-full bg-[#f5f0e6] rounded-3xl overflow-hidden shadow-lg relative">
-               <Image src="/garden-edition-mobile.png" alt="Interior Garden Edition" fill className="object-cover opacity-95" />
+               <Image src="/garden-edition-mobile.png" alt="Interior Garden Edition" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover opacity-95" />
             </div>
           </div>
 
@@ -218,7 +234,16 @@ export default function GardenEditionLayout({
       </section>
 
       {/* ── 4. JARDÍN DE SABORES (GRID LIMPIO) ─────────────────────────────────── */}
-      <section id="sabores" className="py-24 bg-white border-y border-[#f0e8dc] relative z-10">
+      <section id="sabores" className="py-24 bg-white border-y border-[#f0e8dc] relative z-10 overflow-hidden">
+        {/* Motivos florales envolventes */}
+        <div className="absolute top-[10%] left-[-20%] md:left-[-10%] w-[600px] md:w-[800px] opacity-[0.04] mix-blend-multiply pointer-events-none rotate-[15deg]">
+          <Image src="/iconos.svg" alt="" width={941} height={1672} unoptimized className="w-full max-w-none" style={{ transform: 'translateY(-10%)' }} />
+        </div>
+        <div className="absolute bottom-[10%] right-[-20%] md:right-[-10%] w-[600px] md:w-[800px] opacity-[0.05] mix-blend-multiply pointer-events-none -rotate-[20deg]">
+          <Image src="/iconos.svg" alt="" width={941} height={1672} unoptimized className="w-full max-w-none" style={{ transform: 'translateY(-40%)' }} />
+        </div>
+
+        <div className="absolute left-1/2 top-0 h-px w-[min(92vw,1100px)] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#c5a882]/50 to-transparent" aria-hidden="true" />
         
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 text-center mb-24">
           <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-[#a68a64] mb-4">Degustación</p>
@@ -241,13 +266,15 @@ export default function GardenEditionLayout({
                 
                 {/* IMAGEN */}
                 <div className={`relative ${isEven ? "md:order-1" : "md:order-2"}`}>
+                  <div className="absolute -inset-4 rounded-[2rem] border border-[#e6d6bd]" aria-hidden="true" />
                   <div className="aspect-square relative rounded-3xl overflow-hidden bg-[#f5f0e6] shadow-md">
-                    <Image src="/garden-edition-mobile.png" alt={flavor.name} fill className="object-cover opacity-90" />
+                    <Image src="/garden-edition-mobile.png" alt={flavor.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover opacity-90" />
                   </div>
                 </div>
 
                 {/* TEXTO */}
                 <div className={`relative ${isEven ? "md:order-2" : "md:order-1"}`}>
+                  <div className="absolute -left-6 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#e6d6bd] to-transparent md:block" aria-hidden="true" />
                   <div className="flex items-center gap-4 mb-6">
                     <span className="font-serif text-2xl italic" style={{ color: flavorColor }}>0{i + 1}</span>
                     <span className="w-8 h-[1px] bg-[#e6dcd0]"></span>
@@ -284,9 +311,9 @@ export default function GardenEditionLayout({
       </section>
 
       {/* ── 5. FINAL CTA ────────────────── */}
-      <section className="py-32 bg-[#fcfaf7] text-center">
-        <div className="max-w-2xl mx-auto px-6">
-          <Flower2 size={32} strokeWidth={1.5} className="mx-auto text-[#c5a882] mb-8" />
+      <section className="relative overflow-hidden py-32 bg-[#fcfaf7] text-center">
+        <div className="relative max-w-2xl mx-auto px-6">
+          <div className="mx-auto mb-8 h-px w-24 bg-[#c5a882]/50" aria-hidden="true" />
           <h2 className="font-serif text-4xl md:text-5xl font-light text-[#2a1b18] mb-8 leading-tight">
             El detalle perfecto<br /><em className="italic text-[#8c7355]">para ella</em>
           </h2>
